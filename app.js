@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 var layout = require('./views/layout.js')
 var morgan = require('morgan');
 const models = require('./models');
+const wikiRouter = require('./routes/wiki');
+const userRouter = require('./routes/user');
 
 // models.authenticate().
 // then(() => {
@@ -26,4 +28,8 @@ init();
 app.get('/', (req, res, next) => {
   res.send(layout("Hello!"));
 });
+
+app.use('/wiki', wikiRouter);
+
+app.use('/user', userRouter);
 
