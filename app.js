@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var layout = require('./views/layout.js')
 var morgan = require('morgan');
 const models = require('./models');
 
@@ -23,6 +24,6 @@ const init = async() => {
 init();
 
 app.get('/', (req, res, next) => {
-  res.send('Hello this works!')
+  res.send(layout("Hello!"));
 });
 
