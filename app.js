@@ -2,20 +2,25 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-const {db} = require('./models');
+const models = require('./models');
 
-db.authenticate().
-then(() => {
-  console.log('connected to the database');
-})
+// models.authenticate().
+// then(() => {
+//   console.log('connected to the database');
+// })
 
 // app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('./public'))
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
-})
+const init = async() => {
+  await models.db.sync({force: true});
+  app.listen(3000, () => {
+    console.log('Listening on port 3000');
+  });
+}
+
+init();
 
 app.get('/', (req, res, next) => {
   res.send('Hello this works!')
