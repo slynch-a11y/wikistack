@@ -8,6 +8,7 @@ wikiRouter.get('/', (req, res, next) => {
 })
 wikiRouter.post('/', (req, res, next) => {
   //submit a new page to the database
+  console.log('req.body', req.body);
   res.send('gpt to POST /wiki/')
 })
 wikiRouter.get('/add', (req, res, next) => {

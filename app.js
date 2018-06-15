@@ -24,10 +24,14 @@ const init = async() => {
 }
 
 init();
+app.get('/', (req, res, next) => {
+  res.redirect('/wiki');
+});
 
 app.get('/', (req, res, next) => {
   res.send(layout("Hello!"));
 });
+
 
 app.use('/wiki', wikiRouter);
 
