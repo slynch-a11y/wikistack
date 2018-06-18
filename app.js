@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('./public'))
 
 const init = async() => {
-  await models.db.sync({force: true});
+  await models.db.sync();
   app.listen(3000, () => {
     console.log('Listening on port 3000');
   });
@@ -35,5 +35,5 @@ app.get('/', (req, res, next) => {
 
 app.use('/wiki', wikiRouter);
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 

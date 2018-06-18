@@ -9,14 +9,14 @@ module.exports = () => layout(html`
   <div class="form-group">
   <label for="title" class="col-sm-2 control-label">Author Name</label>
   <div class="col-sm-10">
-    <input id="authorName" name="authorName" type="text" class="form-control"/>
+    <input id="name" name="name" type="text" class="form-control"/>
   </div>
 </div>
 
 <div class="form-group">
 <label for="title" class="col-sm-2 control-label">Author E-mail</label>
 <div class="col-sm-10">
-  <input id="authorEmail" name="authorEmail" type="text" class="form-control"/>
+  <input id="email" name="email" type="text" class="form-control"/>
 </div>
 </div>
 
@@ -32,14 +32,17 @@ module.exports = () => layout(html`
   <div class="form-group">
     <label for="title" class="col-sm-2 control-label">Page Content</label>
     <div class="col-sm-10">
-      <input id="pageContent" name="pageContent" type="text" class="form-control"/>
+      <textarea name="content"></textarea>
     </div>
   </div>
 
     <div class="form-group">
     <label for="title" class="col-sm-2 control-label">Page Status</label>
     <div class="col-sm-10">
-      <input id="pageStatus" name="pageStatus" type="text" class="form-control"/>
+       <select name = "status">
+       <option>open</option>
+       <option>closed</option>
+       </select>
     </div>
   </div>
 

@@ -20,6 +20,18 @@ const Page = db.define('page', {
   }
 });
 
+function generateSlug (title) {
+  // Removes all non-alphanumeric characters from title
+  // And make whitespace underscore
+  return title.replace(/\s+/g, '_').replace(/\W/g, '');
+}
+Page.beforeValidate((page) => {
+  if (!page.slug){
+    page.slug = generateSlug(page.title);
+  }
+});
+
+
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
@@ -33,4 +45,8 @@ const User = db.define('user', {
     }
   }
 });
+
+Page.belongsTo(User, { as: 'author' });
+User.hasMany(Page, {foreignKey: 'authorId'});
+
 module.exports = { Page, User, db };

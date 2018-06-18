@@ -1,14 +1,41 @@
 const express = require('express');
 const userRouter = express.Router();
+const addPage = require('../views/addPage');
+const {Page, User} = require('../models');
+const {editPage, main, userList, userPages} = require('../views');
+const wikipage = require('../views/wikipage');
 
-userRouter.get('/', (req, res, next) => {
+userRouter.get('/', async(req, res, next) => {
   //get all users
-  res.send('got our users')
+  try {
+    const users = await User.findAll();
+    res.send(userList(users))
+  }
+  catch (error){
+    next(error);
+  }
+
 });
 
-userRouter.get('/:', (req, res, next) => {
+userRouter.get('/:userId', async(req, res, next) => {
   //get specific user
-  res.send('got our specific user')
+  try {
+    const user = await User.findById(req.params.userId);
+    // const pages = await Page.findAll({
+    //   where: {
+    //     authorId: req.params.userId
+    //   }
+    // });
+    if (user === null){
+      res.sendStatus(404);
+    }
+    const pages = await user.getPages();
+    res.send(userPages(user, pages));
+  }
+  catch(error){
+    next(error);
+  }
+
 });
 
 userRouter.post('/', (req, res, next) => {
